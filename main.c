@@ -32,8 +32,11 @@ void main(void)
 int tela_inicial(void)
 {
 
-  system("clear");
+#if defined(_WIN32) || defined(_WIN64)
   system("cls");
+#else
+  system("clear");
+#endif
   printf("Olá, usuário, tudo bem?");
   printf(NEGRITO "\nEsse programa tem o intuito de te ensinar sobre a Segunda "
                  "Guerra Mundial");
@@ -79,8 +82,11 @@ int menu(void)
 {
   int resp;
 
-  system("clear");
+#if defined(_WIN32) || defined(_WIN64)
   system("cls");
+#else
+  system("clear");
+#endif
 
   printf("\n|------MENU INICIAL-------|\n");
   printf("\nOque deseja fazer?\n");
@@ -150,8 +156,11 @@ int menu_explicacao(void)
 {
   int resp;
 
-  system("clear");
+#if defined(_WIN32) || defined(_WIN64)
   system("cls");
+#else
+  system("clear");
+#endif
   printf("|---MENU DE EXPLICAÇÃO---|\n");
   printf("\n1) EXPLICAÇÃO GERAL SOBRE A SEGUNDA GUERRA MUNDIAL\n");
   printf("\n2) EXPLICAÇÃO SOBRE OS PAÍSES ENVOLVIDOS NA GUERRA\n");
@@ -195,8 +204,11 @@ int menu_explicacao(void)
 int explicacao_geral_2G(void)
 {
 
-  system("clear");
+#if defined(_WIN32) || defined(_WIN64)
   system("cls");
+#else
+  system("clear");
+#endif
 
   printf("\n• A Segunda Guerra Mundial aconteceu entre 1939 e 1945. O "
          "principal objetivo do conflito era o de combater os governos "
@@ -233,8 +245,11 @@ int explicacao_geral_2G(void)
 int explicacao_das_consequencias(void)
 {
 
-  system("clear");
+#if defined(_WIN32) || defined(_WIN64)
   system("cls");
+#else
+  system("clear");
+#endif
   printf("\nAs Consequências da Segunda Guerra Mundial se prolongaram por "
          "longas décadas.\nOs seis anos de confronto resultaram em muitas "
          "mortes, devastação e uma série de desdobramentos no campo "
@@ -250,8 +265,11 @@ int explicacao_das_consequencias(void)
 int explicacao_paises_envolvidos(void)
 {
 
-  system("clear");
+#if defined(_WIN32) || defined(_WIN64)
   system("cls");
+#else
+  system("clear");
+#endif
 
   printf("Quase todos os países do mundo participaram da Segunda Guerra "
          "Mundial, com a exceção de alguns países que permaneceram neutros. A "
@@ -268,8 +286,11 @@ int menu_do_quiz(void)
 {
   int resp;
 
-  system("clear");
+#if defined(_WIN32) || defined(_WIN64)
   system("cls");
+#else
+  system("clear");
+#endif
 
   printf("|------MENU DO QUIZ------|");
   printf("\n");
@@ -295,8 +316,11 @@ int menu_do_quiz(void)
     break;
 
   default:
-    system("clear");
+#if defined(_WIN32) || defined(_WIN64)
     system("cls");
+#else
+    system("clear");
+#endif
     printf("Ops, sem resultados tente novamente...\n");
     menu_do_quiz();
     break;
@@ -308,8 +332,11 @@ int nivel_facil(void)
 {
   int resp, pontuacao = 0;
 
-  system("clear");
+#if defined(_WIN32) || defined(_WIN64)
   system("cls");
+#else
+  system("clear");
+#endif
 
   printf("Ok, nível fácil");
   printf("\nComo já dito acima, digite o número da aluno.respostas");
@@ -443,10 +470,6 @@ int nivel_facil(void)
     }
   }
 
-  if (resp != 1)
-  {
-    printf("\nOk\n");
-  }
   calcular_pontuacao(pontuacao);
   return 0;
 }
@@ -455,8 +478,11 @@ int nivel_medio(void)
 {
   int resp, pontuacao = 0;
 
-  system("clear");
+#if defined(_WIN32) || defined(_WIN64)
   system("cls");
+#else
+  system("clear");
+#endif
 
   printf("\nOk, nível médio");
   printf("\nComo já dito acima, digite o número da aluno.respostas");
@@ -550,6 +576,14 @@ int nivel_medio(void)
   }
   else
   {
+    if (resp != 1)
+    {
+      printf("\nOk\n");
+    }
+    if (resp != 1)
+    {
+      printf("\nOK\n");
+    }
     printf(VERMELHO "\nERROU!\n" RESET);
     printf("O nome certo era Alemanha Nazista, esse foi o nome dado por Hitler "
            "em 16 de março em 1930 e durou até 20 de setembro de 1945\n");
@@ -566,6 +600,14 @@ int nivel_medio(void)
   scanf("%i", &resp);
   if (resp == gabarito[9])
   {
+    if (resp != 1)
+    {
+      printf("\nOk\n");
+    }
+    if (resp != 1)
+    {
+      printf("\nOK\n");
+    }
     printf(VERDE "\nACERTOU!!!\n" RESET);
     pontuacao++;
   }
@@ -589,10 +631,6 @@ int nivel_medio(void)
       printf("\nGabarito %i | %i Sua aluno.respostas", gabarito[i], aluno.respostas[i]);
     }
   }
-  if (resp != 1)
-  {
-    printf("\nOK\n");
-  }
   calcular_pontuacao(pontuacao);
   return 0;
 }
@@ -601,8 +639,11 @@ int nivel_dificil(void)
 {
   int resp, pontuacao = 0;
 
-  system("clear");
+#if defined(_WIN32) || defined(_WIN64)
   system("cls");
+#else
+  system("clear");
+#endif
 
   printf("\nOk, nível difícil");
   printf("\nComo já dito acima, digite o número da aluno.respostas");
@@ -722,6 +763,7 @@ int nivel_dificil(void)
   printf("\n4) Minsk");
   printf("\nRESPOSTA: ");
   scanf("%i", &aluno.respostas[14]);
+
   if (aluno.respostas[14] == gabarito[14])
   {
     printf(VERDE "\nACERTOU!!!\n" RESET);

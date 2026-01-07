@@ -3,22 +3,23 @@
 #include <string.h>
 #include <time.h>
 
-
 time_t valor_final, valor_inicial;
 int tempo_gasto, mortes;
-
 
 #define VERDE "\x1b[32m"
 #define RESET "\x1b[0m"
 #define VERMELHO "\x1b[31m"
 #define NEGRITO "\x1b[1m"
 
-const int gabarito[15] = {2, 4, 1, 1, 2, 3, 2, 4,
-                          3, 2, 1, 3, 3, 1, 2}; 
-int resposta[15];
+const int gabarito[15] = {2, 4, 1, 1, 2, 3, 2, 4, 3, 2, 1, 3, 3, 1, 2};
 
+struct Aluno
+{
+  char nome[75];
+  int respostas[15]
+};
 
-char nome_aluno[75];
+struct Aluno aluno;
 
 void main(void)
 {
@@ -28,18 +29,17 @@ void main(void)
   tela_inicial();
 }
 
-
 int tela_inicial(void)
 {
-  
+
   system("clear");
   system("cls");
   printf("Olá, usuário, tudo bem?");
   printf(NEGRITO "\nEsse programa tem o intuito de te ensinar sobre a Segunda "
                  "Guerra Mundial");
   printf("\nMas primeiro diga-me seu nome: " RESET);
-  scanf("%[^\n]s", nome_aluno);
-  printf("\nOk, %s, Vamos lá", nome_aluno);
+  scanf("%[^\n]s", aluno.nome);
+  printf("\nOk, %s, Vamos lá", aluno.nome);
   menu_inicial();
   return 0;
 }
@@ -60,30 +60,28 @@ int menu_inicial(void)
     system("cls");
     menu();
   }
-  if (resp != 1)
-  {
-    printf("Ok, você não entendeu...");
-    printf("\nÉ simples, %s,", nome_aluno);
-    printf("\nVocê vai clicar no número desejado e dar enter");
-    printf("\nVocê deve está se perguntando por qual motivo estamos usando "
-           "números");
-    printf("\nA resposta é simples, é pra ser mais simples para você");
-    printf("\nAgora, digite qualquer número para prosseguir");
-    printf("\nRESPOSTA: ");
-    scanf("%i", &resp);
-    menu();
-  }
+
+  printf("Ok, você não entendeu...");
+  printf("\nÉ simples, %s,", aluno.nome);
+  printf("\nVocê vai clicar no número desejado e dar enter");
+  printf("\nVocê deve está se perguntando por qual motivo estamos usando "
+         "números");
+  printf("\nA aluno.respostas é simples, é pra ser mais simples para você");
+  printf("\nAgora, digite qualquer número para prosseguir");
+  printf("\nRESPOSTA: ");
+  scanf("%i", &resp);
+  menu();
+
   return 0;
 }
-
 
 int menu(void)
 {
   int resp;
-  
+
   system("clear");
-  system("cls");   
-  
+  system("cls");
+
   printf("\n|------MENU INICIAL-------|\n");
   printf("\nOque deseja fazer?\n");
   printf("\n1) EXPLICAÇÃO SOBRE A SEGUNDA GUERRA MUNDIAL\n");
@@ -126,22 +124,18 @@ int descobrir(void)
 
   case 1:
     menu();
-
     break;
 
   case 2:
     menu_do_quiz();
-
     break;
 
   case 3:
     menu_explicacao();
-
     break;
 
   case 4:
     fim();
-
     break;
 
   default:
@@ -155,9 +149,9 @@ int descobrir(void)
 int menu_explicacao(void)
 {
   int resp;
- 
+
   system("clear");
-  system("cls");   
+  system("cls");
   printf("|---MENU DE EXPLICAÇÃO---|\n");
   printf("\n1) EXPLICAÇÃO GERAL SOBRE A SEGUNDA GUERRA MUNDIAL\n");
   printf("\n2) EXPLICAÇÃO SOBRE OS PAÍSES ENVOLVIDOS NA GUERRA\n");
@@ -200,9 +194,9 @@ int menu_explicacao(void)
 
 int explicacao_geral_2G(void)
 {
- 
+
   system("clear");
-  system("cls");   
+  system("cls");
 
   printf("\n• A Segunda Guerra Mundial aconteceu entre 1939 e 1945. O "
          "principal objetivo do conflito era o de combater os governos "
@@ -231,16 +225,16 @@ int explicacao_geral_2G(void)
          "Eixo, formado por Alemanha, Itália e Japão, e do outro, estava o "
          "grupo dos Aliados, composto por Inglaterra, União Soviética (URSS), "
          "Estados Unidos e França. Outros países participaram da guerra, "
-         "inclusive o Brasil, mas dentro de um desses blocos.\n");  
+         "inclusive o Brasil, mas dentro de um desses blocos.\n");
   descobrir();
   return 0;
 }
 
 int explicacao_das_consequencias(void)
 {
- 
+
   system("clear");
-  system("cls");  
+  system("cls");
   printf("\nAs Consequências da Segunda Guerra Mundial se prolongaram por "
          "longas décadas.\nOs seis anos de confronto resultaram em muitas "
          "mortes, devastação e uma série de desdobramentos no campo "
@@ -255,10 +249,10 @@ int explicacao_das_consequencias(void)
 
 int explicacao_paises_envolvidos(void)
 {
-  
-  system("clear"); 
-  system("cls");   
- 
+
+  system("clear");
+  system("cls");
+
   printf("Quase todos os países do mundo participaram da Segunda Guerra "
          "Mundial, com a exceção de alguns países que permaneceram neutros. A "
          "Segunda Guerra Mundial colocou duas alianças umas contra as outras, "
@@ -274,9 +268,9 @@ int menu_do_quiz(void)
 {
   int resp;
 
-  system("clear"); 
-  system("cls");  
- 
+  system("clear");
+  system("cls");
+
   printf("|------MENU DO QUIZ------|");
   printf("\n");
   printf("1) NÍVEL FÁCIL");
@@ -314,11 +308,11 @@ int nivel_facil(void)
 {
   int resp, pontuacao = 0;
 
-  system("clear"); 
-  system("cls");  
- 
+  system("clear");
+  system("cls");
+
   printf("Ok, nível fácil");
-  printf("\nComo já dito acima, digite o número da resposta");
+  printf("\nComo já dito acima, digite o número da aluno.respostas");
   printf(NEGRITO "\nSÓ UMA COISINHA\nLeia bem as questoẽs\nAlgumas tem uma ou "
                  "mais pegadinhas" RESET);
   printf("\nVamos para a primeira pergunta");
@@ -328,8 +322,8 @@ int nivel_facil(void)
   printf("\n3) 1946");
   printf("\n4) 1981");
   printf("\nRESPOSTA: ");
-  scanf("%i", &resposta[0]);
-  if (resposta[0] == gabarito[0])
+  scanf("%i", &aluno.respostas[0]);
+  if (aluno.respostas[0] == gabarito[0])
   {
     printf(VERDE "\nACERTOU!!!\n" RESET);
     printf("Vamos para a próxima questão\n");
@@ -350,12 +344,12 @@ int nivel_facil(void)
   printf("\n3) 1940");
   printf("\n4) 1945");
   printf("\nRESPOSTA: ");
-  scanf("%i", &resposta[1]);
-  if (resposta[1] == gabarito[1])
+  scanf("%i", &aluno.respostas[1]);
+  if (aluno.respostas[1] == gabarito[1])
   {
     printf(VERDE "\nACERTOU!!!\n" RESET);
     printf("Vamos para a próxima questão\n");
-    pontuacao = pontuacao + 1;
+    pontuacao++;
   }
 
   else
@@ -373,12 +367,12 @@ int nivel_facil(void)
   printf("\n3) Alemanha");
   printf("\n4) Bulgária");
   printf("\nRESPOSTA: ");
-  scanf("%i", &resposta[2]);
-  if (resposta[2] == gabarito[2])
+  scanf("%i", &aluno.respostas[2]);
+  if (aluno.respostas[2] == gabarito[2])
   {
     printf(VERDE "\nACERTOU!!!\n" RESET);
     printf("Vamos para a próxima questão\n");
-    pontuacao = pontuacao + 1;
+    pontuacao++;
   }
 
   else
@@ -395,12 +389,12 @@ int nivel_facil(void)
   printf("\n1) Sim");
   printf("\n2) Não");
   printf("\nRESPOSTA: ");
-  scanf("%i", &resposta[3]);
-  if (resposta[3] == gabarito[3])
+  scanf("%i", &aluno.respostas[3]);
+  if (aluno.respostas[3] == gabarito[3])
   {
     printf(VERDE "\nACERTOU!!!\n" RESET);
     printf("Vamos para a próxima questão\n");
-    pontuacao = pontuacao + 1;
+    pontuacao++;
   }
 
   else
@@ -420,11 +414,11 @@ int nivel_facil(void)
   printf("\n3) Ásia");
   printf("\n4) América do Sul");
   printf("\nRESPOSTA: ");
-  scanf("%i", &resposta[4]);
-  if (resposta[4] == gabarito[4])
+  scanf("%i", &aluno.respostas[4]);
+  if (aluno.respostas[4] == gabarito[4])
   {
     printf(VERDE "\nACERTOU!!!\n" RESET);
-    pontuacao = pontuacao + 1;
+    pontuacao++;
   }
 
   else
@@ -445,7 +439,7 @@ int nivel_facil(void)
     for (int i = 0; i <= 4; i++)
     {
       printf("\nQuestão %i", i + 1);
-      printf("\nGabarito %i | Sua resposta %i", gabarito[i], resposta[i]);
+      printf("\nGabarito %i | Sua aluno.respostas %i", gabarito[i], aluno.respostas[i]);
     }
   }
 
@@ -461,14 +455,14 @@ int nivel_medio(void)
 {
   int resp, pontuacao = 0;
 
-  system("clear"); 
-  system("cls");  
- 
+  system("clear");
+  system("cls");
+
   printf("\nOk, nível médio");
-  printf("\nComo já dito acima, digite o número da resposta");
+  printf("\nComo já dito acima, digite o número da aluno.respostas");
   printf(NEGRITO "\nSÓ UMA COISINHA\nLeia bem as questoẽs\nAlgumas tem uma ou "
                  "mais pegadinhas" RESET);
-  printf("\nComo já dito acima, para responder,  digite o número da resposta");
+  printf("\nComo já dito acima, para responder,  digite o número da aluno.respostas");
   printf("\nVamos para a primeira pergunta");
   printf("\nComo era o nome do comandante alemão que comandava aquela Alemanha "
          "durante a Segunda Guerra Mundial?");
@@ -482,20 +476,8 @@ int nivel_medio(void)
   {
     printf(VERDE "\nACERTOU!!!\n" RESET);
     printf("\nVamos para a próxima questão\n");
-    pontuacao = 1;
+    pontuacao++;
   }
-
-  if (resp == 1)
-  {
-    printf(VERMELHO "\nERROU!\n" RESET);
-    printf("\nLê direitinho na próxima, Adolfo Hitler? O nome certo é Adolf "
-           "Hitler, ele nasceu em Braunau am Inn, na Áustria, no dia 20 de "
-           "abril de 1889. Hitler foi o quarto filho de Alois Hitler e Klara "
-           "Pölzl, ele morreu no dia 30 de abril de 1945, no interior de seu "
-           "aposento dentro do bunker em que ele se escondeu durante as "
-           "últimas semanas da Segunda Guerra Mundial\n");
-  }
-
   else
   {
     printf(VERMELHO "\nERROU!\n" RESET);
@@ -520,7 +502,7 @@ int nivel_medio(void)
   {
     printf(VERDE "\nACERTOU!!!\n" RESET);
     printf("Vamos para a próxima questão\n");
-    pontuacao = pontuacao + 1;
+    pontuacao++;
   }
   else
   {
@@ -541,7 +523,7 @@ int nivel_medio(void)
   {
     printf(VERDE "\nACERTOU!!!\n" RESET);
     printf("Vamos para a próxima questão\n");
-    pontuacao = pontuacao + 1;
+    pontuacao++;
   }
   else
   {
@@ -564,7 +546,7 @@ int nivel_medio(void)
   {
     printf(VERDE "\nACERTOU!!!\n" RESET);
     printf("Vamos para a próxima questão\n");
-    pontuacao = pontuacao + 1;
+    pontuacao++;
   }
   else
   {
@@ -585,7 +567,7 @@ int nivel_medio(void)
   if (resp == gabarito[9])
   {
     printf(VERDE "\nACERTOU!!!\n" RESET);
-    pontuacao = pontuacao + 1;
+    pontuacao++;
   }
   else
   {
@@ -604,7 +586,7 @@ int nivel_medio(void)
   {
     for (int i = 5; i <= 9; i++)
     {
-      printf("\nGabarito %i | %i Sua resposta", gabarito[i], resposta[i]);
+      printf("\nGabarito %i | %i Sua aluno.respostas", gabarito[i], aluno.respostas[i]);
     }
   }
   if (resp != 1)
@@ -619,11 +601,11 @@ int nivel_dificil(void)
 {
   int resp, pontuacao = 0;
 
-  system("clear"); 
-  system("cls");  
- 
+  system("clear");
+  system("cls");
+
   printf("\nOk, nível difícil");
-  printf("\nComo já dito acima, digite o número da resposta");
+  printf("\nComo já dito acima, digite o número da aluno.respostas");
   printf(NEGRITO "\nSÓ UMA COISINHA\nLeia bem as questoẽs\nAlgumas tem uma ou "
                  "mais pegadinhas\n" RESET);
   printf("\nVamos para a Primeira pergunta");
@@ -635,8 +617,8 @@ int nivel_dificil(void)
   printf("\n3) Itália");
   printf("\n4) Bulgária");
   printf("\nRESPOSTA: ");
-  scanf("%i", &resposta[10]);
-  if (resposta[10] == gabarito[10])
+  scanf("%i", &aluno.respostas[10]);
+  if (aluno.respostas[10] == gabarito[10])
   {
     printf(VERDE "\nACERTOU!!!\n" RESET);
     printf("Vamos para a próxima questão\n");
@@ -660,12 +642,12 @@ int nivel_dificil(void)
   printf(
       "\n4) Foi morto por um traidor, Hitler foi morto por um traidor Nazista");
   printf("\nRESPOSTA: ");
-  scanf("%i", &resposta[11]);
-  if (resposta[11] == gabarito[11])
+  scanf("%i", &aluno.respostas[11]);
+  if (aluno.respostas[11] == gabarito[11])
   {
     printf(VERDE "\nACERTOU!!!\n" RESET);
     printf("Vamos para a próxima questão\n");
-    pontuacao = pontuacao + 1;
+    pontuacao++;
   }
   else
   {
@@ -686,12 +668,12 @@ int nivel_dificil(void)
   printf("\n4) O estabele1cimento de acordos militares entre Alemanha, Itália "
          "e Japão");
   printf("\nRESPOSTA: ");
-  scanf("%i", &resposta[12]);
-  if (resposta[12] == gabarito[12])
+  scanf("%i", &aluno.respostas[12]);
+  if (aluno.respostas[12] == gabarito[12])
   {
     printf(VERDE "\nACERTOU!!!\n" RESET);
     printf("Vamos para a próxima questão\n");
-    pontuacao = pontuacao + 1;
+    pontuacao++;
   }
   else
   {
@@ -710,12 +692,12 @@ int nivel_dificil(void)
   printf("\n3) Batalha das Ardenas");
   printf("\n4) Cerco de Bastogne");
   printf("\nRESPOSTA: ");
-  scanf("%i", &resposta[13]);
-  if (resposta[13] == gabarito[13])
+  scanf("%i", &aluno.respostas[13]);
+  if (aluno.respostas[13] == gabarito[13])
   {
     printf(VERDE "\nACERTOU!!!\n" RESET);
     printf("Vamos para a próxima questão\n");
-    pontuacao = pontuacao + 1;
+    pontuacao++;
   }
   else
   {
@@ -739,11 +721,11 @@ int nivel_dificil(void)
   printf("\n3) Moscou");
   printf("\n4) Minsk");
   printf("\nRESPOSTA: ");
-  scanf("%i", &resposta[14]);
-  if (resposta[14] == gabarito[14])
+  scanf("%i", &aluno.respostas[14]);
+  if (aluno.respostas[14] == gabarito[14])
   {
     printf(VERDE "\nACERTOU!!!\n" RESET);
-    pontuacao = pontuacao + 1;
+    pontuacao++;
   }
   else
   {
@@ -759,15 +741,13 @@ int nivel_dificil(void)
 
   if (resp == 1)
   {
+
     for (int i = 10; i <= 14; i++)
     {
-      printf("\nGabarito %i | Sua resposta %i\n", gabarito[i], resposta[i]);
+      printf("\nGabarito %i | Sua aluno.respostas %i\n", gabarito[i], aluno.respostas[i]);
     }
   }
-  if (resp != 1)
-  {
-    printf("\nOk\n");
-  }
+
   calcular_pontuacao(pontuacao);
   return 0;
 }
@@ -776,7 +756,7 @@ int calcular_pontuacao(int pontuacao)
 {
   if (pontuacao == 5)
   {
-    printf("\n\nNOSSA %s", nome_aluno);
+    printf("\n\nNOSSA %s", aluno.nome);
     printf("\nVocê acertou tudo");
     printf("\nacertou %i/5", pontuacao);
   }
@@ -791,7 +771,7 @@ int calcular_pontuacao(int pontuacao)
   {
     printf("\n\nVocê errou tudo...");
     printf("\nacertou %i/5", pontuacao);
-    printf("\nMas não tem problema.");
+    printf("\nMas não tem problema...");
   }
   descobrir();
   return 0;
@@ -799,7 +779,6 @@ int calcular_pontuacao(int pontuacao)
 
 int fim(void)
 {
-
   valor_final = time(NULL);
   tempo_gasto = valor_final - valor_inicial;
   mortes = tempo_gasto * 0.44;
